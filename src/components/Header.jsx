@@ -1,30 +1,26 @@
 import React from 'react'
-import { useLocation, useNavigate } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
+import logo from '../images/realtorClone.svg';
 
 export default function Header() {
-  const location = useLocation();
-  const navigate = useNavigate();
 
-  function pathMatchRoute(route){
-    if (route === location.pathname){
-      return true;
-    }
-  }
   return (
     <div className='bg-white border-b shadow-sm sticky top-0 z-50'>
         <header className='flex justify-between items-center px-3 max-w-6xl mx-auto'>
             <div>
-                <img src="https://svgshare.com/i/rRs.svg" alt="logo" className='h-5 cursor-pointer' onClick={()=>navigate('/')}/>
+              <Link to="/">
+                <img src={logo} alt="logo" className='h-5' /></Link>
             </div>
-            <div>
-              <ul className='flex space-x-10'>
-                <li className={`cursor-pointer py-3 text-sm font-semibold text-gray-400 border-b-[3px] border-b-transparent 
-                ${pathMatchRoute('/') && 'text-black border-b-[#a00aa5]'}`} onClick={()=>navigate('/')}>Home</li>
-                <li className={`cursor-pointer py-3 text-sm font-semibold text-gray-400 border-b-[3px] border-b-transparent 
-                ${pathMatchRoute('/offers') && 'text-black border-b-[#a00aa5]'}` } onClick={()=>navigate('/offers')}> Offers</li>
-                <li className={`cursor-pointer py-3 text-sm font-semibold text-gray-400 border-b-[3px] border-b-transparent 
-                ${pathMatchRoute('/sign-in') && 'text-black border-b-[#a00aa5]'}`} onClick={()=>navigate('/sign-in')}>Sign in</li>
-              </ul>
+            <div className='flex space-x-10'>
+              <NavLink to="/" className={({ isActive })=> isActive ? 'text-black border-b-[3px] border-b-[#a00aa5] py-3 text-sm font-semibold' : 'py-3 text-sm font-semibold text-gray-400 border-b-[3px] border-b-transparent'} >
+                Home
+              </NavLink>
+              <NavLink to="/offers" className={({ isActive })=> isActive ? 'text-black border-b-[3px] border-b-[#a00aa5] py-3 text-sm font-semibold' : 'py-3 text-sm font-semibold text-gray-400 border-b-[3px] border-b-transparent'}>
+                Offers
+              </NavLink>
+              <NavLink to="/sign-in" className={({ isActive })=> isActive ? 'text-black border-b-[3px] border-b-[#a00aa5] py-3 text-sm font-semibold' : 'py-3 text-sm font-semibold text-gray-400 border-b-[3px] border-b-transparent'}>
+                Sign in
+              </NavLink>
             </div>
         </header>
     </div>
